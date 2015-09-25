@@ -2,7 +2,7 @@
 /*
 Plugin Name: LCB FAQ
 Description: Displays questions with answers
-Version: 1.0
+Version: 1.1
 Author: LeftCurlyBracket
 Author URI: http://leftcurlybracket.com
 License: MIT
@@ -96,3 +96,13 @@ function display_faq_categories_column( $column, $post_id ) {
     }
 }
 
+/**
+ * Get FAQ categories array
+ * 
+ * @return array $categories
+ */
+
+function get_faq_categories(){
+    $categories = get_terms('faq-category');
+    return $categories;
+}
