@@ -95,3 +95,14 @@ function lcb_faq_display_categories_column( $column, $post_id ) {
        echo get_the_term_list( $post_id, 'faq-category', '', ', ' );
     }
 }
+
+/**
+ * Get FAQ categories array
+ * 
+ * @return array $categories
+ */
+
+function get_faq_categories(){
+    $categories = get_terms('faq-category');
+    return $categories;
+}
