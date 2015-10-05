@@ -2,24 +2,24 @@
 /*
 Plugin Name: LCB FAQ
 Description: Displays questions with answers
-Version: 1.0
+Version: 1.1
 Author: LeftCurlyBracket
 Author URI: http://leftcurlybracket.com
 License: MIT
 */
 
-add_action('plugins_loaded', 'faq_load_textdomain');
+add_action('plugins_loaded', 'lcb_faq_load_textdomain');
 
-function faq_load_textdomain()
+function lcb_faq_load_textdomain()
 {
     load_plugin_textdomain('lcb-faq', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
 
 include_once 'shortcode.php';
 
-add_action('init', 'create_post_type_faq');
+add_action('init', 'lcb_faq_create_post_type');
 
-function create_post_type_faq()
+function lcb_faq_create_post_type()
 {
     register_post_type('faq', array(
         'labels' => array(
@@ -42,9 +42,9 @@ function create_post_type_faq()
  * Create FAQ's categories
  */
 
-add_action( 'init', 'create_faq_category' );
+add_action( 'init', 'lcb_faq_create_category' );
 
-function create_faq_category(){
+function lcb_faq_create_category(){
     $arg = array(
         'label' => __( 'Faq categories', 'lcb-faq' ),
 	'hierarchical' => true,
@@ -59,7 +59,7 @@ function create_faq_category(){
  * @return string $title
  */
 
-function lcb_change_title_text( $title ){
+function lcb_faq_change_title_text( $title ){
      $screen = get_current_screen();
 
      if  ( 'faq' == $screen->post_type ) {
@@ -69,7 +69,7 @@ function lcb_change_title_text( $title ){
      return $title;
 }
  
-add_filter( 'enter_title_here', 'lcb_change_title_text' );
+add_filter( 'enter_title_here', 'lcb_faq_change_title_text' );
 
 /**
  *  Change title column name to "Question", add categories column
@@ -89,10 +89,9 @@ add_filter('manage_faq_posts_columns' , 'lcb_faq_columns');
  * Display categories in new column
  */
 
-add_action( 'manage_faq_posts_custom_column' , 'display_faq_categories_column', 10, 2 );
-function display_faq_categories_column( $column, $post_id ) {
+add_action( 'manage_faq_posts_custom_column' , 'lcb_faq_display_categories_column', 10, 2 );
+function lcb_faq_display_categories_column( $column, $post_id ) {
     if ($column == 'faq-categories'){
        echo get_the_term_list( $post_id, 'faq-category', '', ', ' );
     }
 }
-
