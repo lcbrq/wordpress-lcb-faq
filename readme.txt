@@ -1,7 +1,9 @@
 === LCB FAQ ===
 Tags: faq, questions
+Contributors: Silpion, Antonelka
 Requires at least: 4.2
 Tested up to: 4.3.1
+Stable tag: 1.1
 License: MIT
 
 Displays questions with answers with FAQ category column.
